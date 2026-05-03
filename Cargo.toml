@@ -1,0 +1,42 @@
+[package]
+name = "project_template"
+version = "0.1.0"
+edition = "2024"
+description = "A template for Rust projects"
+#homepage = ""
+#repository = ""
+#readme = "README.md"
+#documentation = ""
+license = "MIT-0"
+
+[[bin]]
+name = "project-template"
+path = "src/main.rs"
+
+[dependencies]
+
+[dev-dependencies]
+
+[profile.dev]
+opt-level = 0
+debug = true
+strip = false
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = 'unwind'
+incremental = true
+codegen-units = 256
+rpath = false
+
+[profile.release]
+opt-level = 3
+debug = false
+strip = "symbols"
+debug-assertions = false
+overflow-checks = false
+lto = "fat"
+panic = 'unwind'
+incremental = true
+codegen-units = 16
+rpath = false
