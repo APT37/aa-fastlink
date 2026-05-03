@@ -1,9 +1,2 @@
 # ignore cargo build artifacts
 /target
-
-# remove if building an executable, leave it for libraries
-/Cargo.lock
-
-# ignore makepkg build artifacts
-/pkg/
-/*.pkg.tar.zst

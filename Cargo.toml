@@ -1,12 +1,9 @@
 [package]
-name = "project_template"
+name = "aa_fastlink"
 version = "0.1.0"
 edition = "2024"
-description = "A template for Rust projects"
-#homepage = ""
-#repository = ""
-#readme = "README.md"
-#documentation = ""
+description = "Share your Anna's Archive membership, but without leaking your secret key!"
+readme = "README.md"
 license = "MIT-0"
 
 [[bin]]
@@ -14,6 +11,10 @@ name = "project-template"
 path = "src/main.rs"
 
 [dependencies]
+reqwest = { version = "0.13.*", features = ["blocking", "json"] }
+serde = { version = "1.0.*", features = ["derive"] }
+tokio = { version = "1.52.*", features = ["full"] }
+warp = { version = "0.4.*", features = ["server"] }
 
 [dev-dependencies]
 
