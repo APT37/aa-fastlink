@@ -43,6 +43,7 @@ jobs:
 
       - name: Build
         run: |
+          rustup target add ${{ matrix.rust_target }}
           cargo build --release --target ${{ matrix.rust_target }}
           mv ${{ matrix.artifact_name }} ${{ matrix.asset_name }}
 
