@@ -1,13 +1,13 @@
 [package]
 name = "aa_fastlink"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 description = "Share your Anna's Archive membership, but without leaking your secret key!"
 readme = "README.md"
 license = "MIT-0"
 
 [[bin]]
-name = "project-template"
+name = "aa-fastlink"
 path = "src/main.rs"
 
 [dependencies]

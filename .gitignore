@@ -1,2 +1,4 @@
-# ignore cargo build artifacts
+# cargo build artifacts
 /target
+
+/docker-image
