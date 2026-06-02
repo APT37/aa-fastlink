@@ -1,4 +1,2 @@
 # cargo build artifacts
 /target
-
-/docker-image
