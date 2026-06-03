@@ -20,15 +20,20 @@ pub(super) async fn handle_download(form: HashMap<String, String>) -> Result<Res
                 Uri::from_str(&fast_download_link).unwrap(),
             )
             .into_response()),
-            Err(error) => Ok(format!(
-                "{error}{}",
-                if let Some(src) = error.source() {
-                    src.to_string()
-                } else {
-                    String::new()
-                }
-            )
-            .into_response()),
+            Err(error) => Ok({
+                let err_msg = format!(
+                    "{error} {}",
+                    if let Some(src) = error.source() {
+                        format!(": {src}")
+                    } else {
+                        String::new()
+                    }
+                );
+
+                eprintln!("{err_msg}");
+
+                err_msg.into_response()
+            }),
         }
     } else {
         Ok("invalid book URL or hash provided".into_response())
