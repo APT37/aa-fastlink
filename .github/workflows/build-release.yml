@@ -75,7 +75,7 @@ jobs:
     needs: release
 
     steps:
-      - name: Create download directory
+      - name: Create asset download directory
         run: |
           mkdir -p dist
 
