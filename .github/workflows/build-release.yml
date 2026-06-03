@@ -101,7 +101,7 @@ jobs:
       - name: Create Dockerfile
         run: |
           cat > Dockerfile <<'EOF'
-          FROM debian:bookworm-slim
+          FROM debian:trixie-slim
           ARG BINARY_NAME
           COPY ${BINARY_NAME} /usr/local/bin/aa-fastlink
           RUN chmod +x /usr/local/bin/aa-fastlink
