@@ -119,6 +119,6 @@ jobs:
             --build-context dist=./dist \
             --file Dockerfile \
             --progress plain \
-            --build-arg BINARY_NAME=aa-fastlink-linux-x64 \
-            --build-arg BINARY_NAME=aa-fastlink-linux-arm64 \
+            --build-arg BINARY_NAME=dist/aa-fastlink-linux-x64 \
+            --build-arg BINARY_NAME=dist/aa-fastlink-linux-arm64 \
             .
