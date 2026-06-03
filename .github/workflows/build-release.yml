@@ -74,6 +74,10 @@ jobs:
     needs: release
 
     steps:
+      - name: Create download directory
+        run: |
+          mkdir -p dist
+
       - name: Download binaries
         uses: KevinRohn/github-full-release-data@v2
         with:
