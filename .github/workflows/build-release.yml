@@ -78,7 +78,7 @@ jobs:
         uses: KevinRohn/github-full-release-data@v2
         with:
           asset-file: 'aa-fastlink-linux-*'
-          asset-output: dist
+          asset-output: 'dist/'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
