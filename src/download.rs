@@ -22,7 +22,7 @@ pub(super) async fn handle_download(form: HashMap<String, String>) -> Result<Res
             .into_response()),
             Err(error) => Ok({
                 let err_msg = format!(
-                    "{error} {}",
+                    "{error}{}",
                     if let Some(src) = error.source() {
                         format!(": {src}")
                     } else {
