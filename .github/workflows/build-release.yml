@@ -74,23 +74,11 @@ jobs:
     needs: release
 
     steps:
-      - name: Download x64 binary
-        uses: blauqs/action-download-asset@v1.2
+      - name: Download binaries
+        uses: KevinRohn/github-full-release-data@v2
         with:
-          path: dist
-          repo: blauqs/test
-          version: latest
-          file: aa-fastlink-linux-x64
-          out: dist
-
-      - name: Download arm64 binary
-        uses: blauqs/action-download-asset@v1.2
-        with:
-          path: dist
-          repo: blauqs/test
-          version: latest
-          file: aa-fastlink-linux-arm64
-          out: dist
+          asset-file: 'aa-fastlink-linux-*'
+          asset-output: dist
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
