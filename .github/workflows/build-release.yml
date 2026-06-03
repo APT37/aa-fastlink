@@ -102,6 +102,7 @@ jobs:
         run: |
           cat > Dockerfile <<'EOF'
           FROM debian:trixie-slim
+          RUN apt-get update && apt install -y ca-certificates
           ARG BINARY_NAME
           COPY ${BINARY_NAME} /usr/local/bin/aa-fastlink
           RUN chmod +x /usr/local/bin/aa-fastlink
