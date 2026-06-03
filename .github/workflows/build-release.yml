@@ -6,7 +6,7 @@ on:
       - "*"
 
 env:
-  IMAGE: ghcr.io/APT37/aa-fastlink
+  IMAGE: ghcr.io/apt37/aa-fastlink
 
 jobs:
   release:
