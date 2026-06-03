@@ -1,6 +1,6 @@
 [package]
 name = "aa_fastlink"
-version = "0.3.2"
+version = "0.3.3"
 edition = "2024"
 description = "Share your Anna's Archive membership, but without leaking your secret key!"
 readme = "README.md"
