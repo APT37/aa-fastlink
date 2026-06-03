@@ -1,16 +1,15 @@
+use crate::config;
 use serde::Deserialize;
 use std::{collections::HashMap, error::Error, fmt, str::FromStr};
-use warp::{Reply, http::Uri, redirect, reject, reply::Response};
+use warp::{Reply, http::Uri, redirect, reject::Rejection, reply::Response};
 
-pub(super) async fn handle_download(
-    form: HashMap<String, String>,
-) -> Result<Response, reject::Rejection> {
+pub(super) async fn handle_download(form: HashMap<String, String>) -> Result<Response, Rejection> {
     if let Some(link_or_hash) = form.get("link")
         && link_or_hash.len() >= 32
         && link_or_hash.is_ascii()
         && !link_or_hash.contains(' ')
     {
-        if cfg!(debug_assertions) {
+        if *config::DEBUG_LOGGING {
             eprintln!("[{link_or_hash}] ({})", link_or_hash.len());
         }
 
@@ -21,10 +20,18 @@ pub(super) async fn handle_download(
                 Uri::from_str(&fast_download_link).unwrap(),
             )
             .into_response()),
-            Err(error) => Ok(format!("{error}").into_response()),
+            Err(error) => Ok(format!(
+                "{error}{}",
+                if let Some(src) = error.source() {
+                    src.to_string()
+                } else {
+                    String::new()
+                }
+            )
+            .into_response()),
         }
     } else {
-        Ok("invalid link or hash provided".into_response())
+        Ok("invalid book URL or hash provided".into_response())
     }
 }
 
@@ -57,21 +64,21 @@ impl fmt::Display for FetchError {
 impl Error for FetchError {}
 
 async fn get_fast_download_link(hash: &str) -> Result<String, Box<dyn Error>> {
-    if cfg!(debug_assertions) {
+    if *config::DEBUG_LOGGING {
         eprintln!("getting fast_download_link for [{hash}] ({})", hash.len());
     }
 
     let response: Download = reqwest::get(format!(
         "https://{}/dyn/api/fast_download.json?md5={}&key={}",
-        *super::DOMAIN,
+        *config::DOMAIN,
         hash,
-        *super::SECRET
+        *config::SECRET
     ))
     .await?
     .json()
     .await?;
 
-    if cfg!(debug_assertions) {
+    if *config::DEBUG_LOGGING {
         eprintln!("{response:#?}");
     }
 
@@ -79,7 +86,9 @@ async fn get_fast_download_link(hash: &str) -> Result<String, Box<dyn Error>> {
         Ok(fast_download_link)
     } else {
         let error = response.error.unwrap_or("unknown error".to_string());
+
         eprintln!("{error} [{hash}]");
+
         Err(FetchError::new(&error))
     }
 }
