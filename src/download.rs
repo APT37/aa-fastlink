@@ -18,7 +18,10 @@ pub(super) async fn handle_download(form: HashMap<String, String>) -> Result<Res
 
     if let Some(link_or_hash) = form.get("link") {
         if is_valid_link_or_hash(link_or_hash) {
-            debug!("[{link_or_hash}] ({})", link_or_hash.len());
+            debug!(
+                "received query for [{link_or_hash}] ({})",
+                link_or_hash.len()
+            );
 
             let hash = link_or_hash[link_or_hash.len() - 32..].to_string(); // needed?
 
