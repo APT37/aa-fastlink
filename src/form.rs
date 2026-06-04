@@ -1,6 +1,6 @@
 use warp::reply::{Reply, html};
 
-// serves the download form
+// serve the download form
 pub(super) fn render_form() -> impl Reply {
     html(
         r#"
