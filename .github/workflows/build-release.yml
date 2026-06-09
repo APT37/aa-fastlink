@@ -6,7 +6,7 @@ on:
       - "*"
 
 env:
-  IMAGE: ghcr.io/apt37/aa-fastlink
+  IMAGE: ghcr.io/dprk-kcc/aa-fastlink
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 jobs:

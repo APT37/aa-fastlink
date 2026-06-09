@@ -1,6 +1,6 @@
 ## Anna's Archive ~ Fast Download Link Fetcher
 
-Share your Anna's Archive membership, but without leaking your secret key!
+Share your Anna's Archive membership, without sharing your secret key!
 
 ### Environment Variables
 

@@ -2,6 +2,7 @@
 mod config;
 mod download;
 mod form;
+mod version;
 
 #[tokio::main]
 async fn main() {
@@ -15,12 +16,15 @@ async fn main() {
     let _ = *SECRET;
     let _ = *DOMAIN;
 
-    // define download form route and download redirection routes
-    let routes = get().map(form::render_form).or(post()
-        .and(body::content_length_limit(MAX_BODY_SIZE))
-        .and(body::form())
-        .and(path("dl"))
-        .and_then(download::handle_download));
+    // define routes
+    let routes = get()
+        .map(form::render_form)
+        .or(post()
+            .and(body::content_length_limit(MAX_BODY_SIZE))
+            .and(body::form())
+            .and(path("dl"))
+            .and_then(download::handle_download))
+        .or(get().and(path("version")).map(version::plain));
 
     // initialize logger
     init_logger();
